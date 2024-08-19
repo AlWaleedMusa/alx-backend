@@ -8,7 +8,7 @@ from typing import Dict, List, Any
 
 
 class Server:
-    """Server class to paginate a database of popular baby names."""
+    """Server class to paginate a database of names."""
 
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -63,8 +63,7 @@ class Server:
                 selected_keys.append(key)
 
         data = [dataset[key] for key in selected_keys]
-        next_index = selected_keys[-1] + 1 if \
-            len(selected_keys) == page_size else None
+        next_index = selected_keys[-1] + 1 if len(selected_keys) == page_size else None
 
         return {
             "index": start_index,
