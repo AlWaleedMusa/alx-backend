@@ -34,8 +34,6 @@ class Server:
             self.__indexed_dataset = {i: dataset[i] for i in range(len(dataset))}
         return self.__indexed_dataset
 
-        from typing import Dict, List, Any
-
     def get_hyper_index(
         self, start_index: int = None, page_size: int = 10
     ) -> Dict[str, Any]:
