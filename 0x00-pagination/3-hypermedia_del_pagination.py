@@ -27,15 +27,17 @@ class Server:
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
-        """Dataset indexed by sorting position, starting at 0"""
+        """Dataset indexed, starting at 0"""
         if self.__indexed_dataset is None:
             dataset = self.dataset()
             truncated_dataset = dataset[:1000]
-            self.__indexed_dataset = {i: dataset[i] for i in range(len(dataset))}
+            self.__indexed_dataset = \
+                {i: dataset[i] for i in range(len(dataset))}
         return self.__indexed_dataset
 
     def get_hyper_index(
-        self, start_index: int = None, page_size: int = 10
+        self, start_index: int = None,
+        page_size: int = 10
     ) -> Dict[str, Any]:
         """
         The goal here is that if between two queries,
@@ -59,11 +61,13 @@ class Server:
 
         selected_keys = []
         for key in sorted_keys:
-            if key >= start_index and len(selected_keys) < page_size:
+            if key >= start_index and \
+                len(selected_keys) < page_size:
                 selected_keys.append(key)
 
         data = [dataset[key] for key in selected_keys]
-        next_index = selected_keys[-1] + 1 if len(selected_keys) == page_size else None
+        next_index = selected_keys[-1] + 1 \
+            if len(selected_keys) == page_size else None
 
         return {
             "index": start_index,
