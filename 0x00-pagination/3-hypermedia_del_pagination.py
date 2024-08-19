@@ -44,7 +44,8 @@ class Server:
 
         Args:
             start_index (int): start index of the current page
-            page_size (int): size of items required in current page
+            page_size (int): size of items required in
+            current page
 
         Returns:
             Dict[str, Any]: a dict of the following:
@@ -54,7 +55,7 @@ class Server:
         start_index = 0 if start_index is None else start_index
         sorted_keys = sorted(dataset.keys())
 
-        assert 0 <= start_index <= sorted_keys[-1], "Start index out of range."
+        assert 0 <= start_index <= sorted_keys[-1]
 
         selected_keys = []
         for key in sorted_keys:
@@ -62,7 +63,8 @@ class Server:
                 selected_keys.append(key)
 
         data = [dataset[key] for key in selected_keys]
-        next_index = selected_keys[-1] + 1 if len(selected_keys) == page_size else None
+        next_index = selected_keys[-1] + 1 if \
+            len(selected_keys) == page_size else None
 
         return {
             "index": start_index,
