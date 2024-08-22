@@ -53,3 +53,27 @@ class LIFOCache(BaseCaching):
         """
         with self.__rlock:
             return self.cache_data.get(key, None)
+
+    def _balance(self, keyIn):
+        """
+        Balance the cache by removing the most recently
+        added item if the cache is full.
+
+        Args:
+            keyIn (str): The key of the new item being added.
+
+        Returns:
+            str: The key of the item that was removed,
+            or None if no item was removed.
+        """
+        keyOut = None
+        with self.__rlock:
+            keysLength = len(self.__keys)
+            if keyIn not in self.__keys:
+                if len(self.cache_data) == BaseCaching.MAX_ITEMS:
+                    keyOut = self.__keys.pop(keysLength - 1)
+                    self.cache_data.pop(keyOut)
+            else:
+                self.__keys.remove(keyIn)
+            self.__keys.insert(keysLength, keyIn)
+        return keyOut
