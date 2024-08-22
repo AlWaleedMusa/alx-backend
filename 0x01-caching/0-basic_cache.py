@@ -3,7 +3,6 @@
 Basic Cache implementation Class.
 This module provides a simple caching mechanism using a dictionary.
 """
-
 BaseCaching = __import__("base_caching").BaseCaching
 
 
